@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0D1B2A;
+  --navy-2: #0f2236;
+  --blue: #1B3A6D;
+  --gold: #FFC107;
+  --gold-2: #ffb300;
+  --green: #28A745;
+  --gray-line: #E5E9F0;
+  --text: #0D1B2A;
+  --muted: #6C757D;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 44% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 44% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 44% 11%;
+    --primary: 214 60% 26%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 14% 96%;
+    --secondary-foreground: 210 44% 11%;
+    --muted: 210 14% 96%;
+    --muted-foreground: 210 8% 46%;
+    --accent: 45 100% 51%;
+    --accent-foreground: 210 44% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 20% 89%;
+    --input: 214 20% 89%;
+    --ring: 214 60% 26%;
+    --radius: 0.5rem;
+  }
+}
+
+* { border-color: hsl(var(--border)); }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', system-ui, sans-serif; letter-spacing: -0.01em; }
+
+/* selection */
+::selection { background: var(--gold); color: var(--navy); }
+
+/* Reusable */
+.container-x { max-width: 1280px; margin: 0 auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+@media (min-width: 1024px) { .container-x { padding-left: 2rem; padding-right: 2rem; } }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold); color: var(--navy);
+  font-weight: 600; padding: 0.85rem 1.5rem; border-radius: 6px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow: 0 4px 14px rgba(255,193,7,0.28);
+}
+.btn-primary:hover { background: var(--gold-2); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(255,193,7,0.35); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1.5px solid #ffffff; color: #ffffff;
+  font-weight: 600; padding: 0.8rem 1.5rem; border-radius: 6px;
+  transition: all .2s ease; background: transparent;
+}
+.btn-outline:hover { background: #ffffff; color: var(--navy); }
+
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--navy); color: #fff; font-weight: 600;
+  padding: 0.85rem 1.5rem; border-radius: 6px; transition: all .2s ease;
+}
+.btn-dark:hover { background: var(--blue); }
+
+.section-title {
+  font-size: 1.75rem; font-weight: 700; color: var(--navy);
+  position: relative; padding-bottom: 0.75rem; margin-bottom: 1.5rem;
+}
+.section-title::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  height: 4px; width: 60px; background: var(--gold); border-radius: 2px;
+}
+.section-title.center { text-align: center; }
+.section-title.center::after { left: 50%; transform: translateX(-50%); }
+
+@media (min-width: 768px) { .section-title { font-size: 2.25rem; } }
+
+/* Card */
+.rt-card {
+  background: #fff; border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(13,27,42,0.06), 0 8px 24px rgba(13,27,42,0.05);
+  border: 1px solid #eef1f6;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.rt-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,27,42,0.12); }
+
+/* Grain / subtle texture on hero */
+.hero-grain { position: relative; }
+.hero-grain::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 3px 3px; opacity: 0.5;
+}
+
+/* Utility: line clamp */
+.clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp-3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* Focus visible */
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+
+/* Marquee (cert bar) */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+
+/* Fade-in used by intersection */
+.fade-up { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.fade-up.in { opacity: 1; transform: translateY(0); }
